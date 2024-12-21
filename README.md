@@ -54,6 +54,7 @@ conda install pytorch torchvision pytorch-cuda=12.1 -c pytorch -c nvidia  # use 
 pip install -r requirements.txt
 pip install submodules/simple-knn
 pip install submodules/diff-gaussian-rasterization
+pip install submodules/diff-surfel-rasterization
 pip install submodules/fused-ssim
 ```
 

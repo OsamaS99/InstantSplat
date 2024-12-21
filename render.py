@@ -85,7 +85,7 @@ def render_set(model_path, name, iteration, views, gaussians, pipeline, backgrou
     for idx, view in enumerate(tqdm(views, desc="Rendering progress")):
         camera_pose = get_tensor_from_camera(view.world_view_transform.transpose(0, 1))
         rendering = render(
-            view, gaussians, pipeline, background, camera_pose=camera_pose
+            view, gaussians, pipeline, background
         )["render"]
         gt = view.original_image[0:3, :, :]
         torchvision.utils.save_image(
@@ -134,7 +134,7 @@ def render_set_optimize(model_path, name, iteration, views, gaussians, pipeline,
             initial_loss = None
 
             for iteration in range(num_iter):
-                rendering = render(view, gaussians, pipeline, background, camera_pose=torch.cat([camera_tensor_q, camera_tensor_T]))["render"]
+                rendering = render(view, gaussians, pipeline, background)["render"]
                 black_hole_threshold = 0.0
                 mask = (rendering > black_hole_threshold).float()
                 loss = l1_loss_mask(rendering, gt, mask)
@@ -160,7 +160,7 @@ def render_set_optimize(model_path, name, iteration, views, gaussians, pipeline,
 
         optimal_pose = torch.cat([camera_tensor_q, camera_tensor_T])
         # print("optimal_pose-camera_pose: ", optimal_pose-camera_pose)
-        rendering_opt = render(view, gaussians, pipeline, background, camera_pose=optimal_pose)["render"]
+        rendering_opt = render(view, gaussians, pipeline, background)["render"]
             
         torchvision.utils.save_image(
             rendering_opt, os.path.join(render_path, view.image_name + ".png")
@@ -174,7 +174,7 @@ def render_set_optimize(model_path, name, iteration, views, gaussians, pipeline,
         fps_list = []
         for _ in range(1000):
             start = perf_counter()
-            _ = render(view, gaussians, pipeline, background, camera_pose=optimal_pose)
+            _ = render(view, gaussians, pipeline, background)
             end = perf_counter()
             fps_list.append(end - start)        
         fps_list.sort()

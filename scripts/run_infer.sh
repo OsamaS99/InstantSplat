@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Change the absolute path first!
-DATA_ROOT_DIR="<Absolute_Path>/InstantSplat/assets"
+DATA_ROOT_DIR="/home/team13/Workspace/is_3dgs/assets" # Change to your root path
 OUTPUT_DIR="output_infer"
 DATASETS=(
     sora
@@ -9,7 +9,7 @@ DATASETS=(
 
 SCENES=(
     Santorini
-    Art 
+    # Art 
 )
 
 N_VIEWS=(
