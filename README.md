@@ -47,6 +47,9 @@ wget https://download.europe.naverlabs.com/ComputerVision/MASt3R/MASt3R_ViTLarge
 ```bash
 conda create -n instantsplat python=3.10.13 cmake=3.14.0 -y
 conda activate instantsplat
+conda install nvidia/label/cuda-12.1.0::cuda
+conda install nvidia/label/cuda-12.1.0::cuda-toolkit
+conda install nvidia/label/cuda-12.1.0::cuda-nvcc
 conda install pytorch torchvision pytorch-cuda=12.1 -c pytorch -c nvidia  # use the correct version of cuda for your system
 pip install -r requirements.txt
 pip install submodules/simple-knn

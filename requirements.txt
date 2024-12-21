@@ -16,3 +16,7 @@ gdown
 imageio
 cython
 icecream
+plyfile
+open3d
+imageio[pyav]
+imageio[ffmpeg]
